@@ -1,0 +1,12 @@
+[project]
+name = "nyc-taxi-spark-lab"
+version = "0.1.0"
+description = "Measured PySpark demand analytics using NYC TLC yellow taxi data"
+requires-python = ">=3.8"
+dependencies = ["pyspark==3.5.7"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E9", "F"]

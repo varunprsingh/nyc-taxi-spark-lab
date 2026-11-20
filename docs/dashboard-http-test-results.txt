@@ -1,0 +1,9 @@
+test_payload_and_freshness (test_dashboard.DashboardTests.test_payload_and_freshness) ... 127.0.0.1 - - [19/Nov/2026 21:27:08] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2026 21:27:08] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [19/Nov/2026 21:27:08] "GET / HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.224s
+
+OK

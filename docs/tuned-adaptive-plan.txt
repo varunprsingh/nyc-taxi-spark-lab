@@ -1,0 +1,375 @@
+== Physical Plan ==
+AdaptiveSparkPlan (66)
++- == Final Plan ==
+   Execute InsertIntoHadoopFsRelationCommand (36)
+   +- WriteFiles (35)
+      +- Window (34)
+         +- * Sort (33)
+            +- AQEShuffleRead (32)
+               +- ShuffleQueryStage (31), Statistics(sizeInBytes=61.2 MiB, rowCount=5.06E+5)
+                  +- Exchange (30)
+                     +- * HashAggregate (29)
+                        +- AQEShuffleRead (28)
+                           +- ShuffleQueryStage (27), Statistics(sizeInBytes=96.6 MiB, rowCount=7.51E+5)
+                              +- Exchange (26)
+                                 +- * HashAggregate (25)
+                                    +- * Project (24)
+                                       +- * BroadcastHashJoin Inner BuildRight (23)
+                                          :- * Project (20)
+                                          :  +- * BroadcastHashJoin Inner BuildRight (19)
+                                          :     :- Union (13)
+                                          :     :  :- * Project (4)
+                                          :     :  :  +- * Filter (3)
+                                          :     :  :     +- * ColumnarToRow (2)
+                                          :     :  :        +- Scan parquet  (1)
+                                          :     :  :- * Project (8)
+                                          :     :  :  +- * Filter (7)
+                                          :     :  :     +- * ColumnarToRow (6)
+                                          :     :  :        +- Scan parquet  (5)
+                                          :     :  +- * Project (12)
+                                          :     :     +- * Filter (11)
+                                          :     :        +- * ColumnarToRow (10)
+                                          :     :           +- Scan parquet  (9)
+                                          :     +- BroadcastQueryStage (18), Statistics(sizeInBytes=1026.1 KiB, rowCount=265)
+                                          :        +- BroadcastExchange (17)
+                                          :           +- * Project (16)
+                                          :              +- * Filter (15)
+                                          :                 +- Scan csv  (14)
+                                          +- BroadcastQueryStage (22), Statistics(sizeInBytes=1026.1 KiB, rowCount=265)
+                                             +- ReusedExchange (21)
++- == Initial Plan ==
+   Execute InsertIntoHadoopFsRelationCommand (65)
+   +- WriteFiles (64)
+      +- Window (63)
+         +- Sort (62)
+            +- Exchange (61)
+               +- HashAggregate (60)
+                  +- Exchange (59)
+                     +- HashAggregate (58)
+                        +- Project (57)
+                           +- BroadcastHashJoin Inner BuildRight (56)
+                              :- Project (51)
+                              :  +- BroadcastHashJoin Inner BuildRight (50)
+                              :     :- Union (46)
+                              :     :  :- Project (39)
+                              :     :  :  +- Filter (38)
+                              :     :  :     +- Scan parquet  (37)
+                              :     :  :- Project (42)
+                              :     :  :  +- Filter (41)
+                              :     :  :     +- Scan parquet  (40)
+                              :     :  +- Project (45)
+                              :     :     +- Filter (44)
+                              :     :        +- Scan parquet  (43)
+                              :     +- BroadcastExchange (49)
+                              :        +- Project (48)
+                              :           +- Filter (47)
+                              :              +- Scan csv  (14)
+                              +- BroadcastExchange (55)
+                                 +- Project (54)
+                                    +- Filter (53)
+                                       +- Scan csv  (52)
+
+
+(1) Scan parquet
+Output [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-01-bef9bad247bf4edf926d2d456b4bc6ac/accepted]
+PartitionFilters: [isnotnull(source_month#9), (source_month#9 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(2) ColumnarToRow [codegen id : 3]
+Input [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+
+(3) Filter [codegen id : 3]
+Input [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+Condition : (isnotnull(pickup_location_id#2) AND isnotnull(dropoff_location_id#3))
+
+(4) Project [codegen id : 3]
+Output [4]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6]
+Input [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+
+(5) Scan parquet
+Output [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-02-162c7f88411f436da2ff51d3381f14b2/accepted]
+PartitionFilters: [isnotnull(source_month#29), (source_month#29 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(6) ColumnarToRow [codegen id : 4]
+Input [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+
+(7) Filter [codegen id : 4]
+Input [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+Condition : (isnotnull(pickup_location_id#22) AND isnotnull(dropoff_location_id#23))
+
+(8) Project [codegen id : 4]
+Output [4]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26]
+Input [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+
+(9) Scan parquet
+Output [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b/accepted]
+PartitionFilters: [isnotnull(source_month#60), (source_month#60 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(10) ColumnarToRow [codegen id : 5]
+Input [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+
+(11) Filter [codegen id : 5]
+Input [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+Condition : (isnotnull(pickup_location_id#53) AND isnotnull(dropoff_location_id#54))
+
+(12) Project [codegen id : 5]
+Output [4]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57]
+Input [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+
+(13) Union
+
+(14) Scan csv
+Output [2]: [LocationID#82, Zone#84]
+Batched: false
+Location: InMemoryFileIndex [file:/workspace/data/input/taxi_zone_lookup.csv]
+PushedFilters: [IsNotNull(LocationID)]
+ReadSchema: struct<LocationID:int,Zone:string>
+
+(15) Filter [codegen id : 1]
+Input [2]: [LocationID#82, Zone#84]
+Condition : isnotnull(LocationID#82)
+
+(16) Project [codegen id : 1]
+Output [2]: [LocationID#82 AS pickup_location_id#134, Zone#84 AS pickup_zone#135]
+Input [2]: [LocationID#82, Zone#84]
+
+(17) BroadcastExchange
+Input [2]: [pickup_location_id#134, pickup_zone#135]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=410]
+
+(18) BroadcastQueryStage
+Output [2]: [pickup_location_id#134, pickup_zone#135]
+Arguments: 0
+
+(19) BroadcastHashJoin [codegen id : 6]
+Left keys [1]: [pickup_location_id#2]
+Right keys [1]: [pickup_location_id#134]
+Join type: Inner
+Join condition: None
+
+(20) Project [codegen id : 6]
+Output [5]: [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135]
+Input [6]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, pickup_location_id#134, pickup_zone#135]
+
+(21) ReusedExchange [Reuses operator id: 17]
+Output [2]: [dropoff_location_id#152, dropoff_zone#153]
+
+(22) BroadcastQueryStage
+Output [2]: [dropoff_location_id#152, dropoff_zone#153]
+Arguments: 2
+
+(23) BroadcastHashJoin [codegen id : 6]
+Left keys [1]: [dropoff_location_id#3]
+Right keys [1]: [dropoff_location_id#152]
+Join type: Inner
+Join condition: None
+
+(24) Project [codegen id : 6]
+Output [7]: [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS _groupingexpression#240, hour(pickup_at#0, Some(UTC)) AS _groupingexpression#241]
+Input [7]: [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135, dropoff_location_id#152, dropoff_zone#153]
+
+(25) HashAggregate [codegen id : 6]
+Input [7]: [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Keys [6]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Functions [2]: [partial_count(1), partial_sum(total_amount#6)]
+Aggregate Attributes [3]: [count#225L, sum#226, isEmpty#227]
+Results [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+
+(26) Exchange
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Arguments: hashpartitioning(pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, 8), ENSURE_REQUIREMENTS, [plan_id=574]
+
+(27) ShuffleQueryStage
+Output [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Arguments: 3
+
+(28) AQEShuffleRead
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Arguments: coalesced
+
+(29) HashAggregate [codegen id : 7]
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Keys [6]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Functions [2]: [count(1), sum(total_amount#6)]
+Aggregate Attributes [2]: [count(1)#193L, sum(total_amount#6)#195]
+Results [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240 AS weekday#177, _groupingexpression#241 AS hour#178, count(1)#193L AS trip_count#194L, sum(total_amount#6)#195 AS total_collected_amount#196]
+
+(30) Exchange
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: hashpartitioning(weekday#177, hour#178, 8), ENSURE_REQUIREMENTS, [plan_id=660]
+
+(31) ShuffleQueryStage
+Output [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: 4
+
+(32) AQEShuffleRead
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: coalesced
+
+(33) Sort [codegen id : 8]
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: [weekday#177 ASC NULLS FIRST, hour#178 ASC NULLS FIRST, trip_count#194L DESC NULLS LAST], false, 0
+
+(34) Window
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: [dense_rank(trip_count#194L) windowspecdefinition(weekday#177, hour#178, trip_count#194L DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS route_rank#207], [weekday#177, hour#178], [trip_count#194L DESC NULLS LAST]
+
+(35) WriteFiles
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196, route_rank#207]
+
+(36) Execute InsertIntoHadoopFsRelationCommand
+Input: []
+Arguments: file:/workspace/data/benchmarks/suite-20261119T161856Z-tuned-1/result, false, Parquet, [path=/workspace/data/benchmarks/suite-20261119T161856Z-tuned-1/result], ErrorIfExists, [pickup_location_id, dropoff_location_id, pickup_zone, dropoff_zone, weekday, hour, trip_count, total_collected_amount, route_rank]
+
+(37) Scan parquet
+Output [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-01-bef9bad247bf4edf926d2d456b4bc6ac/accepted]
+PartitionFilters: [isnotnull(source_month#9), (source_month#9 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(38) Filter
+Input [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+Condition : (isnotnull(pickup_location_id#2) AND isnotnull(dropoff_location_id#3))
+
+(39) Project
+Output [4]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6]
+Input [5]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, source_month#9]
+
+(40) Scan parquet
+Output [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-02-162c7f88411f436da2ff51d3381f14b2/accepted]
+PartitionFilters: [isnotnull(source_month#29), (source_month#29 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(41) Filter
+Input [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+Condition : (isnotnull(pickup_location_id#22) AND isnotnull(dropoff_location_id#23))
+
+(42) Project
+Output [4]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26]
+Input [5]: [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26, source_month#29]
+
+(43) Scan parquet
+Output [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+Batched: true
+Location: InMemoryFileIndex [file:/workspace/data/versions/2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b/accepted]
+PartitionFilters: [isnotnull(source_month#60), (source_month#60 = 2024-01)]
+PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)]
+ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decimal(18,2)>
+
+(44) Filter
+Input [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+Condition : (isnotnull(pickup_location_id#53) AND isnotnull(dropoff_location_id#54))
+
+(45) Project
+Output [4]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57]
+Input [5]: [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57, source_month#60]
+
+(46) Union
+
+(47) Filter
+Input [2]: [LocationID#82, Zone#84]
+Condition : isnotnull(LocationID#82)
+
+(48) Project
+Output [2]: [LocationID#82 AS pickup_location_id#134, Zone#84 AS pickup_zone#135]
+Input [2]: [LocationID#82, Zone#84]
+
+(49) BroadcastExchange
+Input [2]: [pickup_location_id#134, pickup_zone#135]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=345]
+
+(50) BroadcastHashJoin
+Left keys [1]: [pickup_location_id#2]
+Right keys [1]: [pickup_location_id#134]
+Join type: Inner
+Join condition: None
+
+(51) Project
+Output [5]: [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135]
+Input [6]: [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6, pickup_location_id#134, pickup_zone#135]
+
+(52) Scan csv
+Output [2]: [LocationID#158, Zone#160]
+Batched: false
+Location: InMemoryFileIndex [file:/workspace/data/input/taxi_zone_lookup.csv]
+PushedFilters: [IsNotNull(LocationID)]
+ReadSchema: struct<LocationID:int,Zone:string>
+
+(53) Filter
+Input [2]: [LocationID#158, Zone#160]
+Condition : isnotnull(LocationID#158)
+
+(54) Project
+Output [2]: [LocationID#158 AS dropoff_location_id#152, Zone#160 AS dropoff_zone#153]
+Input [2]: [LocationID#158, Zone#160]
+
+(55) BroadcastExchange
+Input [2]: [dropoff_location_id#152, dropoff_zone#153]
+Arguments: HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=349]
+
+(56) BroadcastHashJoin
+Left keys [1]: [dropoff_location_id#3]
+Right keys [1]: [dropoff_location_id#152]
+Join type: Inner
+Join condition: None
+
+(57) Project
+Output [7]: [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS _groupingexpression#240, hour(pickup_at#0, Some(UTC)) AS _groupingexpression#241]
+Input [7]: [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135, dropoff_location_id#152, dropoff_zone#153]
+
+(58) HashAggregate
+Input [7]: [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Keys [6]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Functions [2]: [partial_count(1), partial_sum(total_amount#6)]
+Aggregate Attributes [3]: [count#225L, sum#226, isEmpty#227]
+Results [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+
+(59) Exchange
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Arguments: hashpartitioning(pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, 8), ENSURE_REQUIREMENTS, [plan_id=354]
+
+(60) HashAggregate
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241, count#228L, sum#229, isEmpty#230]
+Keys [6]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240, _groupingexpression#241]
+Functions [2]: [count(1), sum(total_amount#6)]
+Aggregate Attributes [2]: [count(1)#193L, sum(total_amount#6)#195]
+Results [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#240 AS weekday#177, _groupingexpression#241 AS hour#178, count(1)#193L AS trip_count#194L, sum(total_amount#6)#195 AS total_collected_amount#196]
+
+(61) Exchange
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: hashpartitioning(weekday#177, hour#178, 8), ENSURE_REQUIREMENTS, [plan_id=357]
+
+(62) Sort
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: [weekday#177 ASC NULLS FIRST, hour#178 ASC NULLS FIRST, trip_count#194L DESC NULLS LAST], false, 0
+
+(63) Window
+Input [8]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+Arguments: [dense_rank(trip_count#194L) windowspecdefinition(weekday#177, hour#178, trip_count#194L DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS route_rank#207], [weekday#177, hour#178], [trip_count#194L DESC NULLS LAST]
+
+(64) WriteFiles
+Input [9]: [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196, route_rank#207]
+
+(65) Execute InsertIntoHadoopFsRelationCommand
+Input: []
+Arguments: file:/workspace/data/benchmarks/suite-20261119T161856Z-tuned-1/result, false, Parquet, [path=/workspace/data/benchmarks/suite-20261119T161856Z-tuned-1/result], ErrorIfExists, [pickup_location_id, dropoff_location_id, pickup_zone, dropoff_zone, weekday, hour, trip_count, total_collected_amount, route_rank]
+
+(66) AdaptiveSparkPlan
+Output: []
+Arguments: isFinalPlan=true

@@ -1,0 +1,33 @@
+name: nyc-taxi-spark-lab
+services:
+  spark:
+    image: apache/spark:3.5.7-python3@sha256:936ff39fd63e2bb5ed064f0fbe1518198473f1cdbfa2f863d087a9a8e58116ba
+    user: "0:0"
+    working_dir: /workspace
+    entrypoint: ["/opt/spark/bin/spark-submit", "--driver-memory", "768m", "--conf", "spark.driver.maxResultSize=128m"]
+    command: ["/workspace/jobs/run.py", "--help"]
+    environment:
+      PYTHONPATH: /workspace/src
+      SPARK_LOCAL_IP: 127.0.0.1
+      SPARK_LOCAL_DIRS: /tmp/spark-local
+      SPARK_MASTER: local[2]
+    volumes:
+      - ./src:/workspace/src:ro
+      - ./jobs:/workspace/jobs:ro
+      - ./tests:/workspace/tests:ro
+      - ./scripts:/workspace/scripts:ro
+      - ./data:/workspace/data
+    mem_limit: 2300m
+    cpus: 2
+  dashboard:
+    profiles: [dashboard]
+    image: python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df
+    working_dir: /site
+    entrypoint: [python, /site/server.py]
+    volumes:
+      - ./dashboard:/site:ro
+      - ./data:/data:ro
+    ports:
+      - "127.0.0.1:8502:8502"
+    mem_limit: 128m
+    cpus: 0.5

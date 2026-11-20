@@ -1,0 +1,313 @@
+{
+  "suite": "suite-20261119T161856Z",
+  "month": "2024-01",
+  "measured_runs": [
+    "suite-20261119T161856Z-broadcast_only-1",
+    "suite-20261119T161856Z-tuned-1",
+    "suite-20261119T161856Z-baseline-1",
+    "suite-20261119T161856Z-tuned-2",
+    "suite-20261119T161856Z-baseline-2",
+    "suite-20261119T161856Z-broadcast_only-2",
+    "suite-20261119T161856Z-baseline-3",
+    "suite-20261119T161856Z-broadcast_only-3",
+    "suite-20261119T161856Z-tuned-3"
+  ],
+  "warmup_runs": [
+    "suite-20261119T161856Z-baseline-warmup",
+    "suite-20261119T161856Z-broadcast_only-warmup",
+    "suite-20261119T161856Z-tuned-warmup"
+  ],
+  "method": "One discarded full workload warmup per configuration; fresh JVM per run; rotated order; OS cache uncontrolled",
+  "result_rows": 506476,
+  "aggregate_reconciliation": {
+    "trips": 2964568,
+    "total_collected_amount": "79454508.28"
+  },
+  "exact_multiset_equality": true,
+  "metrics": [
+    {
+      "run_id": "suite-20261119T161856Z-broadcast_only-1",
+      "config": "broadcast_only",
+      "settings": {
+        "broadcast": true,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 81.84,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4607638,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795105559971",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69156859,
+      "shuffle_write_bytes": 69156859,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 122552,
+      "successful_tasks": 109
+    },
+    {
+      "run_id": "suite-20261119T161856Z-tuned-1",
+      "config": "tuned",
+      "settings": {
+        "broadcast": true,
+        "aqe": true,
+        "shuffle": 8
+      },
+      "seconds": 70.312,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 3,
+      "output_bytes": 4358099,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795105702565",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69835747,
+      "shuffle_write_bytes": 69835747,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 112252,
+      "successful_tasks": 20
+    },
+    {
+      "run_id": "suite-20261119T161856Z-baseline-1",
+      "config": "baseline",
+      "settings": {
+        "broadcast": false,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 66.863,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4253850,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795105836263",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 104225486,
+      "shuffle_write_bytes": 104215370,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 106942,
+      "successful_tasks": 141
+    },
+    {
+      "run_id": "suite-20261119T161856Z-tuned-2",
+      "config": "tuned",
+      "settings": {
+        "broadcast": true,
+        "aqe": true,
+        "shuffle": 8
+      },
+      "seconds": 44.37,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 3,
+      "output_bytes": 4358099,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795105968309",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69835747,
+      "shuffle_write_bytes": 69835747,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 71422,
+      "successful_tasks": 20
+    },
+    {
+      "run_id": "suite-20261119T161856Z-baseline-2",
+      "config": "baseline",
+      "settings": {
+        "broadcast": false,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 90.462,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4253850,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795106056780",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 104225486,
+      "shuffle_write_bytes": 104215370,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 141822,
+      "successful_tasks": 141
+    },
+    {
+      "run_id": "suite-20261119T161856Z-broadcast_only-2",
+      "config": "broadcast_only",
+      "settings": {
+        "broadcast": true,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 82.153,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4607638,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795106199559",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69156859,
+      "shuffle_write_bytes": 69156859,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 129522,
+      "successful_tasks": 109
+    },
+    {
+      "run_id": "suite-20261119T161856Z-baseline-3",
+      "config": "baseline",
+      "settings": {
+        "broadcast": false,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 76.997,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4253850,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795106336808",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 104225486,
+      "shuffle_write_bytes": 104215370,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 118874,
+      "successful_tasks": 141
+    },
+    {
+      "run_id": "suite-20261119T161856Z-broadcast_only-3",
+      "config": "broadcast_only",
+      "settings": {
+        "broadcast": true,
+        "aqe": false,
+        "shuffle": 32
+      },
+      "seconds": 66.752,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 32,
+      "output_bytes": 4607638,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795106459722",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69156859,
+      "shuffle_write_bytes": 69156859,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 98697,
+      "successful_tasks": 109
+    },
+    {
+      "run_id": "suite-20261119T161856Z-tuned-3",
+      "config": "tuned",
+      "settings": {
+        "broadcast": true,
+        "aqe": true,
+        "shuffle": 8
+      },
+      "seconds": 47.717,
+      "source_month": "2024-01",
+      "input_trip_rows": 2964568,
+      "partition_versions": {
+        "2024-01": "2024-01-bef9bad247bf4edf926d2d456b4bc6ac",
+        "2024-02": "2024-02-162c7f88411f436da2ff51d3381f14b2",
+        "2024-03": "2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b"
+      },
+      "output_files": 3,
+      "output_bytes": 4358099,
+      "spark_version": "3.5.7",
+      "master": "local[2]",
+      "application_id": "local-1795106573556",
+      "java_version": "11.0.27",
+      "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+      "metrics_scope": "whole application including lookup validation and initialization; timer is query+write only",
+      "shuffle_read_bytes": 69835747,
+      "shuffle_write_bytes": 69835747,
+      "disk_spilled_bytes": 0,
+      "memory_spilled_bytes": 0,
+      "executor_run_ms": 79559,
+      "successful_tasks": 20
+    }
+  ],
+  "median_seconds": {
+    "baseline": 76.997,
+    "broadcast_only": 81.84,
+    "tuned": 47.717
+  }
+}

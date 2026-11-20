@@ -1,0 +1,104 @@
+== Parsed Logical Plan ==
+'Project [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196, dense_rank() windowspecdefinition('weekday, 'hour, 'trip_count DESC NULLS LAST, unspecifiedframe$()) AS route_rank#207]
++- Aggregate [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)), hour(pickup_at#0, Some(UTC))], [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS weekday#177, hour(pickup_at#0, Some(UTC)) AS hour#178, count(1) AS trip_count#194L, sum(total_amount#6) AS total_collected_amount#196]
+   +- Project [dropoff_location_id#3, pickup_location_id#2, pickup_at#0, dropoff_at#1, trip_distance#4, fare_amount#5, total_amount#6, duration_minutes#7, pickup_date#8, source_month#9, pickup_zone#135, pickup_borough#136, dropoff_zone#153, dropoff_borough#154]
+      +- Join Inner, (dropoff_location_id#3 = dropoff_location_id#152)
+         :- Project [pickup_location_id#2, pickup_at#0, dropoff_at#1, dropoff_location_id#3, trip_distance#4, fare_amount#5, total_amount#6, duration_minutes#7, pickup_date#8, source_month#9, pickup_zone#135, pickup_borough#136]
+         :  +- Join Inner, (pickup_location_id#2 = pickup_location_id#134)
+         :     :- Filter (source_month#9 = 2024-01)
+         :     :  +- Union false, false
+         :     :     :- Relation [pickup_at#0,dropoff_at#1,pickup_location_id#2,dropoff_location_id#3,trip_distance#4,fare_amount#5,total_amount#6,duration_minutes#7,pickup_date#8,source_month#9] parquet
+         :     :     :- Project [pickup_at#20, dropoff_at#21, pickup_location_id#22, dropoff_location_id#23, trip_distance#24, fare_amount#25, total_amount#26, duration_minutes#27, pickup_date#28, source_month#29]
+         :     :     :  +- Relation [pickup_at#20,dropoff_at#21,pickup_location_id#22,dropoff_location_id#23,trip_distance#24,fare_amount#25,total_amount#26,duration_minutes#27,pickup_date#28,source_month#29] parquet
+         :     :     +- Project [pickup_at#51, dropoff_at#52, pickup_location_id#53, dropoff_location_id#54, trip_distance#55, fare_amount#56, total_amount#57, duration_minutes#58, pickup_date#59, source_month#60]
+         :     :        +- Relation [pickup_at#51,dropoff_at#52,pickup_location_id#53,dropoff_location_id#54,trip_distance#55,fare_amount#56,total_amount#57,duration_minutes#58,pickup_date#59,source_month#60] parquet
+         :     +- ResolvedHint (strategy=broadcast)
+         :        +- Project [zone_id#90 AS pickup_location_id#134, zone_name#92 AS pickup_zone#135, borough#91 AS pickup_borough#136]
+         :           +- Project [LocationID#82 AS zone_id#90, Borough#83 AS borough#91, Zone#84 AS zone_name#92]
+         :              +- Relation [LocationID#82,Borough#83,Zone#84,service_zone#85] csv
+         +- ResolvedHint (strategy=broadcast)
+            +- Project [zone_id#90 AS dropoff_location_id#152, zone_name#92 AS dropoff_zone#153, borough#91 AS dropoff_borough#154]
+               +- Project [LocationID#158 AS zone_id#90, Borough#159 AS borough#91, Zone#160 AS zone_name#92]
+                  +- Relation [LocationID#158,Borough#159,Zone#160,service_zone#161] csv
+
+== Analyzed Logical Plan ==
+pickup_location_id: int, dropoff_location_id: int, pickup_zone: string, dropoff_zone: string, weekday: int, hour: int, trip_count: bigint, total_collected_amount: decimal(28,2), route_rank: int
+Project [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196, route_rank#207]
++- Project [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196, route_rank#207, route_rank#207]
+   +- Window [dense_rank(trip_count#194L) windowspecdefinition(weekday#177, hour#178, trip_count#194L DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS route_rank#207], [weekday#177, hour#178], [trip_count#194L DESC NULLS LAST]
+      +- Project [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196]
+         +- Aggregate [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)), hour(pickup_at#0, Some(UTC))], [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS weekday#177, hour(pickup_at#0, Some(UTC)) AS hour#178, count(1) AS trip_count#194L, sum(total_amount#6) AS total_collected_amount#196]
+            +- Project [dropoff_location_id#3, pickup_location_id#2, pickup_at#0, dropoff_at#1, trip_distance#4, fare_amount#5, total_amount#6, duration_minutes#7, pickup_date#8, source_month#9, pickup_zone#135, pickup_borough#136, dropoff_zone#153, dropoff_borough#154]
+               +- Join Inner, (dropoff_location_id#3 = dropoff_location_id#152)
+                  :- Project [pickup_location_id#2, pickup_at#0, dropoff_at#1, dropoff_location_id#3, trip_distance#4, fare_amount#5, total_amount#6, duration_minutes#7, pickup_date#8, source_month#9, pickup_zone#135, pickup_borough#136]
+                  :  +- Join Inner, (pickup_location_id#2 = pickup_location_id#134)
+                  :     :- Filter (source_month#9 = 2024-01)
+                  :     :  +- Union false, false
+                  :     :     :- Relation [pickup_at#0,dropoff_at#1,pickup_location_id#2,dropoff_location_id#3,trip_distance#4,fare_amount#5,total_amount#6,duration_minutes#7,pickup_date#8,source_month#9] parquet
+                  :     :     :- Project [pickup_at#20, dropoff_at#21, pickup_location_id#22, dropoff_location_id#23, trip_distance#24, fare_amount#25, total_amount#26, duration_minutes#27, pickup_date#28, source_month#29]
+                  :     :     :  +- Relation [pickup_at#20,dropoff_at#21,pickup_location_id#22,dropoff_location_id#23,trip_distance#24,fare_amount#25,total_amount#26,duration_minutes#27,pickup_date#28,source_month#29] parquet
+                  :     :     +- Project [pickup_at#51, dropoff_at#52, pickup_location_id#53, dropoff_location_id#54, trip_distance#55, fare_amount#56, total_amount#57, duration_minutes#58, pickup_date#59, source_month#60]
+                  :     :        +- Relation [pickup_at#51,dropoff_at#52,pickup_location_id#53,dropoff_location_id#54,trip_distance#55,fare_amount#56,total_amount#57,duration_minutes#58,pickup_date#59,source_month#60] parquet
+                  :     +- ResolvedHint (strategy=broadcast)
+                  :        +- Project [zone_id#90 AS pickup_location_id#134, zone_name#92 AS pickup_zone#135, borough#91 AS pickup_borough#136]
+                  :           +- Project [LocationID#82 AS zone_id#90, Borough#83 AS borough#91, Zone#84 AS zone_name#92]
+                  :              +- Relation [LocationID#82,Borough#83,Zone#84,service_zone#85] csv
+                  +- ResolvedHint (strategy=broadcast)
+                     +- Project [zone_id#90 AS dropoff_location_id#152, zone_name#92 AS dropoff_zone#153, borough#91 AS dropoff_borough#154]
+                        +- Project [LocationID#158 AS zone_id#90, Borough#159 AS borough#91, Zone#160 AS zone_name#92]
+                           +- Relation [LocationID#158,Borough#159,Zone#160,service_zone#161] csv
+
+== Optimized Logical Plan ==
+Window [dense_rank(trip_count#194L) windowspecdefinition(weekday#177, hour#178, trip_count#194L DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS route_rank#207], [weekday#177, hour#178], [trip_count#194L DESC NULLS LAST]
++- Aggregate [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223, _groupingexpression#224], [pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223 AS weekday#177, _groupingexpression#224 AS hour#178, count(1) AS trip_count#194L, sum(total_amount#6) AS total_collected_amount#196]
+   +- Project [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS _groupingexpression#223, hour(pickup_at#0, Some(UTC)) AS _groupingexpression#224]
+      +- Join Inner, (dropoff_location_id#3 = dropoff_location_id#152), rightHint=(strategy=broadcast)
+         :- Project [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135]
+         :  +- Join Inner, (pickup_location_id#2 = pickup_location_id#134), rightHint=(strategy=broadcast)
+         :     :- Union false, false
+         :     :  :- Project [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6]
+         :     :  :  +- Filter ((isnotnull(source_month#9) AND (source_month#9 = 2024-01)) AND (isnotnull(pickup_location_id#2) AND isnotnull(dropoff_location_id#3)))
+         :     :  :     +- Relation [pickup_at#0,dropoff_at#1,pickup_location_id#2,dropoff_location_id#3,trip_distance#4,fare_amount#5,total_amount#6,duration_minutes#7,pickup_date#8,source_month#9] parquet
+         :     :  :- Project [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26]
+         :     :  :  +- Filter ((isnotnull(source_month#29) AND (source_month#29 = 2024-01)) AND (isnotnull(pickup_location_id#22) AND isnotnull(dropoff_location_id#23)))
+         :     :  :     +- Relation [pickup_at#20,dropoff_at#21,pickup_location_id#22,dropoff_location_id#23,trip_distance#24,fare_amount#25,total_amount#26,duration_minutes#27,pickup_date#28,source_month#29] parquet
+         :     :  +- Project [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57]
+         :     :     +- Filter ((isnotnull(source_month#60) AND (source_month#60 = 2024-01)) AND (isnotnull(pickup_location_id#53) AND isnotnull(dropoff_location_id#54)))
+         :     :        +- Relation [pickup_at#51,dropoff_at#52,pickup_location_id#53,dropoff_location_id#54,trip_distance#55,fare_amount#56,total_amount#57,duration_minutes#58,pickup_date#59,source_month#60] parquet
+         :     +- Project [LocationID#82 AS pickup_location_id#134, Zone#84 AS pickup_zone#135]
+         :        +- Filter isnotnull(LocationID#82)
+         :           +- Relation [LocationID#82,Borough#83,Zone#84,service_zone#85] csv
+         +- Project [LocationID#158 AS dropoff_location_id#152, Zone#160 AS dropoff_zone#153]
+            +- Filter isnotnull(LocationID#158)
+               +- Relation [LocationID#158,Borough#159,Zone#160,service_zone#161] csv
+
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- Window [dense_rank(trip_count#194L) windowspecdefinition(weekday#177, hour#178, trip_count#194L DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS route_rank#207], [weekday#177, hour#178], [trip_count#194L DESC NULLS LAST]
+   +- Sort [weekday#177 ASC NULLS FIRST, hour#178 ASC NULLS FIRST, trip_count#194L DESC NULLS LAST], false, 0
+      +- Exchange hashpartitioning(weekday#177, hour#178, 8), ENSURE_REQUIREMENTS, [plan_id=263]
+         +- HashAggregate(keys=[pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223, _groupingexpression#224], functions=[count(1), sum(total_amount#6)], output=[pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, weekday#177, hour#178, trip_count#194L, total_collected_amount#196])
+            +- Exchange hashpartitioning(pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223, _groupingexpression#224, 8), ENSURE_REQUIREMENTS, [plan_id=260]
+               +- HashAggregate(keys=[pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223, _groupingexpression#224], functions=[partial_count(1), partial_sum(total_amount#6)], output=[pickup_location_id#2, dropoff_location_id#3, pickup_zone#135, dropoff_zone#153, _groupingexpression#223, _groupingexpression#224, count#228L, sum#229, isEmpty#230])
+                  +- Project [dropoff_location_id#3, pickup_location_id#2, total_amount#6, pickup_zone#135, dropoff_zone#153, dayofweek(cast(pickup_at#0 as date)) AS _groupingexpression#223, hour(pickup_at#0, Some(UTC)) AS _groupingexpression#224]
+                     +- BroadcastHashJoin [dropoff_location_id#3], [dropoff_location_id#152], Inner, BuildRight, false
+                        :- Project [pickup_location_id#2, pickup_at#0, dropoff_location_id#3, total_amount#6, pickup_zone#135]
+                        :  +- BroadcastHashJoin [pickup_location_id#2], [pickup_location_id#134], Inner, BuildRight, false
+                        :     :- Union
+                        :     :  :- Project [pickup_at#0, pickup_location_id#2, dropoff_location_id#3, total_amount#6]
+                        :     :  :  +- Filter (isnotnull(pickup_location_id#2) AND isnotnull(dropoff_location_id#3))
+                        :     :  :     +- FileScan parquet [pickup_at#0,pickup_location_id#2,dropoff_location_id#3,total_amount#6,source_month#9] Batched: true, DataFilters: [isnotnull(pickup_location_id#2), isnotnull(dropoff_location_id#3)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/workspace/data/versions/2024-01-bef9bad247bf4edf926d2d456b4bc6ac..., PartitionFilters: [isnotnull(source_month#9), (source_month#9 = 2024-01)], PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)], ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decima...
+                        :     :  :- Project [pickup_at#20, pickup_location_id#22, dropoff_location_id#23, total_amount#26]
+                        :     :  :  +- Filter (isnotnull(pickup_location_id#22) AND isnotnull(dropoff_location_id#23))
+                        :     :  :     +- FileScan parquet [pickup_at#20,pickup_location_id#22,dropoff_location_id#23,total_amount#26,source_month#29] Batched: true, DataFilters: [isnotnull(pickup_location_id#22), isnotnull(dropoff_location_id#23)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/workspace/data/versions/2024-02-162c7f88411f436da2ff51d3381f14b2..., PartitionFilters: [isnotnull(source_month#29), (source_month#29 = 2024-01)], PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)], ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decima...
+                        :     :  +- Project [pickup_at#51, pickup_location_id#53, dropoff_location_id#54, total_amount#57]
+                        :     :     +- Filter (isnotnull(pickup_location_id#53) AND isnotnull(dropoff_location_id#54))
+                        :     :        +- FileScan parquet [pickup_at#51,pickup_location_id#53,dropoff_location_id#54,total_amount#57,source_month#60] Batched: true, DataFilters: [isnotnull(pickup_location_id#53), isnotnull(dropoff_location_id#54)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/workspace/data/versions/2024-03-e30fd5ce28494bb8a0a29ca894ae1c0b..., PartitionFilters: [isnotnull(source_month#60), (source_month#60 = 2024-01)], PushedFilters: [IsNotNull(pickup_location_id), IsNotNull(dropoff_location_id)], ReadSchema: struct<pickup_at:timestamp_ntz,pickup_location_id:int,dropoff_location_id:int,total_amount:decima...
+                        :     +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=251]
+                        :        +- Project [LocationID#82 AS pickup_location_id#134, Zone#84 AS pickup_zone#135]
+                        :           +- Filter isnotnull(LocationID#82)
+                        :              +- FileScan csv [LocationID#82,Zone#84] Batched: false, DataFilters: [isnotnull(LocationID#82)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/workspace/data/input/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LocationID)], ReadSchema: struct<LocationID:int,Zone:string>
+                        +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=255]
+                           +- Project [LocationID#158 AS dropoff_location_id#152, Zone#160 AS dropoff_zone#153]
+                              +- Filter isnotnull(LocationID#158)
+                                 +- FileScan csv [LocationID#158,Zone#160] Batched: false, DataFilters: [isnotnull(LocationID#158)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/workspace/data/input/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LocationID)], ReadSchema: struct<LocationID:int,Zone:string>

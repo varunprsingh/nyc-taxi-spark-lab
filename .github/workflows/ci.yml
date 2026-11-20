@@ -1,0 +1,21 @@
+name: Spark fixture checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  fixture-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install ruff==0.14.5
+      - run: ruff check src jobs scripts tests dashboard
+      - run: python -m compileall -q src jobs scripts tests dashboard
+      - run: mkdir -p data
+      - name: Run real Spark tests on synthetic fixtures
+        run: docker compose run --rm --no-deps spark /workspace/tests/test_pipeline.py
+      - name: Test aggregate dashboard endpoints
+        run: python -m unittest discover -s tests -p test_dashboard.py -v

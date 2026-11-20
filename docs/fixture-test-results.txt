@@ -1,0 +1,143 @@
+ Container nyc-taxi-spark-lab-spark-run-d3bbab875104 Creating
+ Container nyc-taxi-spark-lab-spark-run-d3bbab875104 Created
+26/11/19 15:47:01 INFO SparkContext: Running Spark version 3.5.7
+26/11/19 15:47:01 INFO SparkContext: OS info Linux, 6.18.54.1-microsoft-standard-WSL2, amd64
+26/11/19 15:47:01 INFO SparkContext: Java version 11.0.27
+26/11/19 15:47:01 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/19 15:47:01 INFO ResourceUtils: ==============================================================
+26/11/19 15:47:01 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/11/19 15:47:01 INFO ResourceUtils: ==============================================================
+26/11/19 15:47:01 INFO SparkContext: Submitted application: taxi-fixture-tests
+26/11/19 15:47:01 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/19 15:47:02 INFO ResourceProfile: Limiting resource is cpu
+26/11/19 15:47:02 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/11/19 15:47:02 INFO SecurityManager: Changing view acls to: root
+26/11/19 15:47:02 INFO SecurityManager: Changing modify acls to: root
+26/11/19 15:47:02 INFO SecurityManager: Changing view acls groups to:
+26/11/19 15:47:02 INFO SecurityManager: Changing modify acls groups to:
+26/11/19 15:47:02 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
+26/11/19 15:47:03 INFO Utils: Successfully started service 'sparkDriver' on port 38591.
+26/11/19 15:47:03 INFO SparkEnv: Registering MapOutputTracker
+26/11/19 15:47:04 INFO SparkEnv: Registering BlockManagerMaster
+26/11/19 15:47:04 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/11/19 15:47:04 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/11/19 15:47:04 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/11/19 15:47:04 INFO DiskBlockManager: Created local directory at /workspace/data/tmp/blockmgr-57519369-211c-48b1-87e0-c2e7306ca272
+26/11/19 15:47:04 INFO MemoryStore: MemoryStore started with capacity 280.8 MiB
+26/11/19 15:47:04 INFO SparkEnv: Registering OutputCommitCoordinator
+26/11/19 15:47:04 INFO Executor: Starting executor ID driver on host localhost
+26/11/19 15:47:04 INFO Executor: OS info Linux, 6.18.54.1-microsoft-standard-WSL2, amd64
+26/11/19 15:47:04 INFO Executor: Java version 11.0.27
+26/11/19 15:47:05 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/11/19 15:47:05 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@7b78bed4 for default.
+26/11/19 15:47:05 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 36461.
+26/11/19 15:47:05 INFO NettyBlockTransferService: Server created on localhost 127.0.0.1:36461
+26/11/19 15:47:05 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/11/19 15:47:05 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, localhost, 36461, None)
+26/11/19 15:47:05 INFO BlockManagerMasterEndpoint: Registering block manager localhost:36461 with 280.8 MiB RAM, BlockManagerId(driver, localhost, 36461, None)
+26/11/19 15:47:05 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, localhost, 36461, None)
+26/11/19 15:47:05 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, localhost, 36461, None)
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 38804), raddr=('127.0.0.1', 37907)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_atomic_reprocess_failure_and_reporting_reconciliation (__main__.SparkTests) ... /usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 50688), raddr=('127.0.0.1', 33369)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Started partition 2024-01: 2,498 input bytes
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 51112), raddr=('127.0.0.1', 37671)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 36358), raddr=('127.0.0.1', 33033)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Published 2024-01: 3 accepted, 3 quarantined
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 33262), raddr=('127.0.0.1', 42337)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Skipped unchanged partition 2024-01
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 42394), raddr=('127.0.0.1', 40843)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 56462), raddr=('127.0.0.1', 36835)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Started partition 2024-01: 2,498 input bytes
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 49032), raddr=('127.0.0.1', 41161)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 47378), raddr=('127.0.0.1', 33663)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Published 2024-01: 3 accepted, 3 quarantined
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 52916), raddr=('127.0.0.1', 37043)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Started partition 2024-01: 2,498 input bytes
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 53378), raddr=('127.0.0.1', 37523)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 40048), raddr=('127.0.0.1', 42923)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 59418), raddr=('127.0.0.1', 41169)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 34838), raddr=('127.0.0.1', 44239)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 42446), raddr=('127.0.0.1', 36527)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 40948), raddr=('127.0.0.1', 43959)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 51232), raddr=('127.0.0.1', 42075)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 55278), raddr=('127.0.0.1', 41739)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 44668), raddr=('127.0.0.1', 41277)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 36700), raddr=('127.0.0.1', 41413)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 55294), raddr=('127.0.0.1', 38251)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dense_calendar_and_complete_four_week_baseline (__main__.SparkTests) ... /usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 38834), raddr=('127.0.0.1', 44151)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 53758), raddr=('127.0.0.1', 46521)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 47706), raddr=('127.0.0.1', 46237)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 36970), raddr=('127.0.0.1', 45761)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_month_validation (__main__.SparkTests) ... ok
+test_schema_and_lookup_rejected (__main__.SparkTests) ... /usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 44270), raddr=('127.0.0.1', 33145)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_validation_preserves_duplicates_refunds_and_multiple_reasons (__main__.SparkTests) ... /usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 49288), raddr=('127.0.0.1', 36271)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 39498), raddr=('127.0.0.1', 37687)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=7, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 50880), raddr=('127.0.0.1', 34229)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_writer_lock_excludes_other_publisher (__main__.SparkTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 262.193s
+
+OK
